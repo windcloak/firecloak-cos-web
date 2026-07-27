@@ -3,7 +3,7 @@
     <a routerLink="/" class="brand">Firecloak</a>
   </mat-toolbar-row>
 
-  <mat-toolbar-row class="nav-row">
+  <mat-toolbar-row class="nav-row" [class.handset]="isHandset()">
     @if (isHandset()) {
       <button
         mat-icon-button

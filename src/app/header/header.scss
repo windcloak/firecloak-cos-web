@@ -17,11 +17,17 @@
 
 .nav-row {
   justify-content: center;
+
+  // On phones this row holds only the hamburger button; left-align it
+  // instead of centering, so it sits in the usual mobile-nav corner.
+  &.handset {
+    justify-content: flex-start;
+  }
 }
 
 .desktop-nav {
   display: flex;
-  gap: 4px;
+  gap: 0px;
 }
 
 a.active {
