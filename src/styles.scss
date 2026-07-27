@@ -14,7 +14,10 @@ html {
         primary: theme-colors.$primary-palette,
         tertiary: theme-colors.$tertiary-palette,
       ),
-      typography: Roboto,
+      typography: (
+        plain-family: Roboto,
+        brand-family: Acme,
+      ),
       density: 0,
     )
   );
