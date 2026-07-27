@@ -1,0 +1,28 @@
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 16px 24px;
+  border-top: 1px solid var(--mat-sys-outline-variant);
+  color: var(--mat-sys-on-surface-variant);
+}
+
+.copyright {
+  margin: 0;
+}
+
+.social-links {
+  display: flex;
+  gap: 16px;
+
+  a {
+    color: inherit;
+    display: inline-flex;
+
+    &:hover {
+      color: var(--mat-sys-primary);
+    }
+  }
+}

@@ -1,45 +1,16 @@
-import { Component, signal } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
-import { Home } from './home/home';
-import { About } from './about/about';
-import { Cosplay } from './cosplay/cosplay';
-import { CosplayDetails } from './cosplay-details/cosplay-details';
-import { Tutorials } from './tutorials/tutorials';
-import { TutorialDetails } from './tutorial-details/tutorial-details';
-import { Contact } from './contact/contact';
-import { Reviews } from './reviews/reviews';
-import { Links } from './links/links';
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { Header } from './header/header';
+import { Footer } from './footer/footer';
 
 @Component({
   selector: 'app-root',
-  imports: [
-    RouterLink,
-    RouterOutlet,
-    Home,
-    About,
-    Cosplay,
-    CosplayDetails,
-    Tutorials,
-    TutorialDetails,
-    Contact,
-    Reviews,
-    Links,
-  ],
+  imports: [RouterOutlet, Header, Footer],
   template: `
-    <nav>
-      <a routerLink="/">Home</a>
-      |
-      <a routerLink="/about">About</a> |
-      <a routerLink="/cosplay">Cosplay</a>
-      |
-      <a routerLink="/tutorials">Tutorials</a> | <a routerLink="/contact">Contact</a> |
-      <a routerLink="/links">Links</a>|
-      <a routerLink="/reviews">Reviews</a>
-    </nav>
+    <app-header />
     <router-outlet />
+    <app-footer />
   `,
   styleUrl: './app.scss',
 })
-export class App {
-  protected readonly title = signal('firecloak-cos-web');
-}
+export class App {}

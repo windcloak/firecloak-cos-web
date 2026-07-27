@@ -1,0 +1,29 @@
+// Two stacked rows: logo on top, nav underneath, both centered
+// horizontally, matching the old site's layout.
+.header {
+  height: auto;
+}
+
+.brand-row {
+  justify-content: center;
+}
+
+.brand {
+  font-family: Acme, sans-serif;
+  font-size: 1.5rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.nav-row {
+  justify-content: center;
+}
+
+.desktop-nav {
+  display: flex;
+  gap: 4px;
+}
+
+a.active {
+  font-weight: 700;
+}

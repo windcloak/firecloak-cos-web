@@ -1,0 +1,42 @@
+<mat-toolbar class="header">
+  <mat-toolbar-row class="brand-row">
+    <a routerLink="/" class="brand">Firecloak</a>
+  </mat-toolbar-row>
+
+  <mat-toolbar-row class="nav-row">
+    @if (isHandset()) {
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="mobileMenu"
+        aria-label="Toggle navigation menu"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+      <mat-menu #mobileMenu="matMenu">
+        @for (link of menuLinks; track link.url) {
+          <a
+            mat-menu-item
+            [routerLink]="link.url"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: link.url === '/' }"
+          >
+            {{ link.title }}
+          </a>
+        }
+      </mat-menu>
+    } @else {
+      <nav class="desktop-nav">
+        @for (link of menuLinks; track link.url) {
+          <a
+            mat-button
+            [routerLink]="link.url"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: link.url === '/' }"
+          >
+            {{ link.title }}
+          </a>
+        }
+      </nav>
+    }
+  </mat-toolbar-row>
+</mat-toolbar>
