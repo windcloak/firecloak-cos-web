@@ -9,7 +9,6 @@ import { TutorialDetails } from './tutorial-details/tutorial-details';
 import { Contact } from './contact/contact';
 import { Reviews } from './reviews/reviews';
 import { Links } from './links/links';
-import { NotFound } from './not-found/not-found';
 
 @Component({
   selector: 'app-root',
@@ -25,7 +24,6 @@ import { NotFound } from './not-found/not-found';
     Contact,
     Reviews,
     Links,
-    NotFound,
   ],
   template: `
     <nav>
