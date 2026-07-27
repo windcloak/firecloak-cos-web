@@ -7,6 +7,7 @@ import {Tutorials} from './tutorials/tutorials';
 import {TutorialDetails} from './tutorial-details/tutorial-details';
 import {Contact} from './contact/contact';
 import {Reviews} from './reviews/reviews';
+import {Links} from './links/links';
 import {NotFound} from './not-found/not-found';
 
 export const routes: Routes = [
@@ -16,7 +17,7 @@ export const routes: Routes = [
     component: Home,
   },  
   {
-    path: '',
+    path: 'about',
     title: 'About Page',
     component: About,
   }, 
@@ -49,6 +50,11 @@ export const routes: Routes = [
     path: 'reviews',
     title: 'Reviews Page',
     component: Reviews,
+  },
+  {
+    path: 'links',
+    title: 'Links Page',
+    component: Links,
   },
   {
     path: '**',
