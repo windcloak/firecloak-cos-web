@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-cosplay-details',
@@ -6,4 +6,6 @@ import { Component } from '@angular/core';
   templateUrl: './cosplay-details.html',
   styleUrl: './cosplay-details.scss',
 })
-export class CosplayDetails {}
+export class CosplayDetails {
+  id = input<string>();
+}

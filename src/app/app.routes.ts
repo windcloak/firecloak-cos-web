@@ -1,64 +1,54 @@
 import {Routes} from '@angular/router';
-import {Home} from './home/home';
-import {About} from './about/about';
-import {Cosplay} from './cosplay/cosplay';
-import {CosplayDetails} from './cosplay-details/cosplay-details';
-import {Tutorials} from './tutorials/tutorials';
-import {TutorialDetails} from './tutorial-details/tutorial-details';
-import {Contact} from './contact/contact';
-import {Reviews} from './reviews/reviews';
-import {Links} from './links/links';
-import {NotFound} from './not-found/not-found';
 
 export const routes: Routes = [
   {
     path: '',
     title: 'App Home Page',
-    component: Home,
+    loadComponent: () => import('./home/home').then(m => m.Home),
   },  
   {
     path: 'about',
     title: 'About Page',
-    component: About,
+    loadComponent: () => import('./about/about').then(m => m.About),
   }, 
   {
     path: 'cosplay',
     title: 'Cosplay Page',
-    component: Cosplay,
+    loadComponent: () => import('./cosplay/cosplay').then(m => m.Cosplay),
   }, 
   {
     path: 'cosplay/:id',
     title: 'Cosplay Details Page',
-    component: CosplayDetails,
+    loadComponent: () => import('./cosplay-details/cosplay-details').then(m => m.CosplayDetails),
   },
   {
     path: 'tutorials',
     title: 'Tutorials Page',
-    component: Tutorials,
+    loadComponent: () => import('./tutorials/tutorials').then(m => m.Tutorials),
   }, 
   {
     path: 'tutorials/:id',
     title: 'Tutorial Details Page',
-    component: TutorialDetails,
+    loadComponent: () => import('./tutorial-details/tutorial-details').then(m => m.TutorialDetails),
   }, 
   {
     path: 'contact',
     title: 'Contact',
-    component: Contact,
+    loadComponent: () => import('./contact/contact').then(m => m.Contact),
   },
   {
     path: 'reviews',
     title: 'Reviews Page',
-    component: Reviews,
+    loadComponent: () => import('./reviews/reviews').then(m => m.Reviews),
   },
   {
     path: 'links',
     title: 'Links Page',
-    component: Links,
+    loadComponent: () => import('./links/links').then(m => m.Links),
   },
   {
     path: '**',
     title: 'Not Found',
-    component: NotFound,
+    loadComponent: () => import('./not-found/not-found').then(m => m.NotFound),
   },
 ];

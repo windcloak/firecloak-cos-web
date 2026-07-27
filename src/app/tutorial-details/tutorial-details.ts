@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-tutorial-details',
@@ -6,4 +6,6 @@ import { Component } from '@angular/core';
   templateUrl: './tutorial-details.html',
   styleUrl: './tutorial-details.scss',
 })
-export class TutorialDetails {}
+export class TutorialDetails {
+  id = input<string>();
+}
