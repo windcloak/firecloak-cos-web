@@ -1,0 +1,23 @@
+<mat-sidenav-container class="app-shell">
+  <mat-sidenav #drawer mode="over">
+    <mat-nav-list>
+      @for (link of navLinks; track link.url) {
+        <a
+          mat-list-item
+          [routerLink]="link.url"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: link.url === '/' }"
+          (click)="drawer.close()"
+        >
+          {{ link.title }}
+        </a>
+      }
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <app-header (menuToggle)="drawer.toggle()" />
+    <router-outlet />
+    <app-footer />
+  </mat-sidenav-content>
+</mat-sidenav-container>

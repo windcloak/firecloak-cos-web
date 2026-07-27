@@ -1,0 +1,18 @@
+// mat-sidenav-container needs a real height to size itself and its
+// backdrop against — without this it collapses to content height and
+// the drawer/backdrop behave oddly.
+:host {
+  display: block;
+  height: 100%;
+}
+
+.app-shell {
+  height: 100%;
+}
+
+mat-sidenav {
+  // Close to full width on phones (matches the old Bootstrap collapse
+  // "takes up the screen" feel), capped so it doesn't look silly on
+  // larger/landscape handsets.
+  width: min(100vw, 360px);
+}
