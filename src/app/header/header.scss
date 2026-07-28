@@ -40,24 +40,25 @@
 
 .desktop-nav {
   display: flex;
-  gap: 0px;
+  gap: 16px;
 
-  // mat-toolbar overrides any button inside it to use the toolbar's own
-  // text color (--mat-sys-on-surface, near-black) instead of the
-  // button's usual default — so the link color has to be set explicitly
-  // here rather than relying on mat-button's own default.
   a {
     // Resolves to #7b563c in light mode, and automatically flips to a
-    // lighter tone (#edbd9c) in dark mode (see theme.ts) to stay
-    // readable — swap to --mat-sys-tertiary-fixed instead if a constant
-    // color regardless of mode is ever wanted here.
+    // lighter tone (#edbd9c) in dark mode (see theme.ts)
     color: var(--mat-sys-tertiary);
+    font-weight: 500;
+    font-size: 1.1rem;
+    text-transform: uppercase;
   }
 
   // Material doesn't offer a hover-color token for buttons (only a
   // background state-layer tint), so this is plain CSS too.
   a:hover {
     color: var(--mat-sys-secondary);
+  }
+
+  a.active {
+    color: var(--mat-sys-primary);
   }
 }
 
@@ -71,8 +72,4 @@
     // Decorative only — the toggle itself carries the accessible label.
     color: var(--mat-sys-on-surface-variant);
   }
-}
-
-a.active {
-  font-weight: 700;
 }

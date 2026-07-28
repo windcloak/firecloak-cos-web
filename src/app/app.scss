@@ -11,8 +11,13 @@
 }
 
 mat-sidenav {
-  // Close to full width on phones (matches the old Bootstrap collapse
-  // "takes up the screen" feel), capped so it doesn't look silly on
-  // larger/landscape handsets.
+  // Close to full width on phones
   width: min(100vw, 360px);
+}
+
+mat-nav-list a {
+  text-transform: uppercase;
+}
+mat-nav-list a.active {
+  --mat-list-list-item-label-text-color: var(--mat-sys-tertiary);
 }
