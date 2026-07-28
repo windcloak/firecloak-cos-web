@@ -6,8 +6,21 @@
 @use '@angular/material' as mat;
 @use './styles/theme-colors' as theme-colors;
 
+// Custom brand color, not part of the generated M3 palette — the pale
+// orange from the old site's header. Defined here by name (rather than
+// inlining the hex in the override below) so it's clear this is a
+// deliberate one-off choice, not a mistaken system token reference.
+$header-background-color: #f6d5a1;
+
 html {
   height: 100%;
+
+  // Default to light mode. The Theme service (src/app/theme.ts) sets
+  // this directly on <html> at runtime when the user flips the slide
+  // toggle — it does NOT follow the OS/browser dark-mode preference on
+  // its own, only an explicit user choice.
+  color-scheme: light;
+
   @include mat.theme(
     (
       color: (
@@ -36,13 +49,21 @@ html {
       list-item-label-text-weight: 500,
     )
   );
+
+  // Header (mat-toolbar) background color.
+  @include mat.toolbar-overrides(
+    (
+      container-background-color: $header-background-color,
+    )
+  );
 }
 
 body {
-  // Default the application to a light color theme. This can be changed to
-  // `dark` to enable the dark color theme, or to `light dark` to defer to the
-  // user's system settings.
-  color-scheme: light;
+  // Note: color-scheme is set on <html> above, not here. body needs to
+  // inherit it rather than declare its own, otherwise it would always
+  // win over whatever the Theme service sets on <html>, and the toggle
+  // would have no visible effect on anything using light-dark() at the
+  // body level (e.g. the background-color below).
 
   // Set a default background, font and text colors for the application using
   // Angular Material's system-level CSS variables. Learn more about these

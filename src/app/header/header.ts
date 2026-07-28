@@ -1,4 +1,5 @@
 import { Component, inject, output } from '@angular/core';
+import { NgOptimizedImage } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
 import { RouterLink, RouterLinkActive } from '@angular/router';
@@ -6,16 +7,28 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { NAV_LINKS } from '../nav-links';
+import { Theme } from '../theme';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, RouterLinkActive, MatToolbarModule, MatIconModule, MatButtonModule],
+  imports: [
+    RouterLink,
+    RouterLinkActive,
+    NgOptimizedImage,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatSlideToggleModule,
+  ],
   templateUrl: './header.html',
   styleUrl: './header.scss',
 })
 export class Header {
   private readonly breakpointObserver = inject(BreakpointObserver);
+
+  protected readonly theme = inject(Theme);
 
   // True on phone-sized viewports; drives whether we show the hamburger
   // trigger button or the horizontal nav row.

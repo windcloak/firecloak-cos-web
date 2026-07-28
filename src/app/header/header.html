@@ -1,6 +1,14 @@
 <mat-toolbar class="header">
   <mat-toolbar-row class="brand-row">
-    <a routerLink="/" class="brand">Firecloak</a>
+    <a routerLink="/" class="brand">
+      <img
+        ngSrc="layout/firecloak-logo.png"
+        width="250"
+        height="101"
+        alt="Firecloak logo"
+        priority
+      />
+    </a>
   </mat-toolbar-row>
 
   <mat-toolbar-row class="nav-row" [class.handset]="isHandset()">
@@ -22,5 +30,13 @@
         }
       </nav>
     }
+
+    <mat-slide-toggle
+      class="theme-toggle"
+      [checked]="theme.isDark()"
+      (change)="theme.toggle()"
+    >
+      Dark mode
+    </mat-slide-toggle>
   </mat-toolbar-row>
 </mat-toolbar>

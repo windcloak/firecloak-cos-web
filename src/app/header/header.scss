@@ -6,13 +6,26 @@
 
 .brand-row {
   justify-content: center;
+  // mat-toolbar-row has a fixed height (64px/56px) by default, which
+  // would clip a taller logo — let this row grow to fit its content
+  // instead, with some breathing room above/below.
+  height: auto;
+  padding-block: 12px;
 }
 
 .brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-family: Acme, sans-serif;
   font-size: 1.5rem;
   text-decoration: none;
   color: inherit;
+
+  img {
+    height: 120px;
+    width: auto;
+  }
 }
 
 .nav-row {
@@ -28,6 +41,28 @@
 .desktop-nav {
   display: flex;
   gap: 0px;
+
+  // mat-toolbar overrides any button inside it to use the toolbar's own
+  // text color (--mat-sys-on-surface, near-black) instead of the
+  // button's usual default — so the link color has to be set explicitly
+  // here rather than relying on mat-button's own default.
+  a {
+    // Resolves to #7b563c in light mode, and automatically flips to a
+    // lighter tone (#edbd9c) in dark mode (see theme.ts) to stay
+    // readable — swap to --mat-sys-tertiary-fixed instead if a constant
+    // color regardless of mode is ever wanted here.
+    color: var(--mat-sys-tertiary);
+  }
+
+  // Material doesn't offer a hover-color token for buttons (only a
+  // background state-layer tint), so this is plain CSS too.
+  a:hover {
+    color: var(--mat-sys-secondary);
+  }
+}
+
+.theme-toggle {
+  margin-inline-start: 12px;
 }
 
 a.active {
