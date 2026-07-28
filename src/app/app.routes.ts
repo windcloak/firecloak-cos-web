@@ -3,32 +3,32 @@ import {Routes} from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    title: 'App Home Page',
+    title: 'Firecloak',
     loadComponent: () => import('./home/home').then(m => m.Home),
   },  
   {
     path: 'about',
-    title: 'About Page',
+    title: 'Firecloak - About',
     loadComponent: () => import('./about/about').then(m => m.About),
   }, 
   {
     path: 'cosplay',
-    title: 'Cosplay Page',
+    title: 'Firecloak - Cosplay',
     loadComponent: () => import('./cosplay/cosplay').then(m => m.Cosplay),
   }, 
   {
     path: 'cosplay/:id',
-    title: 'Cosplay Details Page',
+    title: 'Firecloak - Cosplay Details',
     loadComponent: () => import('./cosplay-details/cosplay-details').then(m => m.CosplayDetails),
   },
   {
     path: 'tutorials',
-    title: 'Tutorials Page',
+    title: 'Firecloak - Tutorials',
     loadComponent: () => import('./tutorials/tutorials').then(m => m.Tutorials),
   }, 
   {
     path: 'tutorials/:id',
-    title: 'Tutorial Details Page',
+    title: 'Firecloak - Tutorial Details',
     loadComponent: () => import('./tutorial-details/tutorial-details').then(m => m.TutorialDetails),
   }, 
   {
@@ -38,17 +38,17 @@ export const routes: Routes = [
   },
   {
     path: 'reviews',
-    title: 'Reviews Page',
+    title: 'Firecloak - Reviews',
     loadComponent: () => import('./reviews/reviews').then(m => m.Reviews),
   },
   {
     path: 'links',
-    title: 'Links Page',
+    title: 'Firecloak - Links',
     loadComponent: () => import('./links/links').then(m => m.Links),
   },
   {
     path: '**',
-    title: 'Not Found',
+    title: 'Firecloak - Not Found',
     loadComponent: () => import('./not-found/not-found').then(m => m.NotFound),
   },
 ];
