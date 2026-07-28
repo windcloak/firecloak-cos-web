@@ -31,12 +31,14 @@
       </nav>
     }
 
-    <mat-slide-toggle
-      class="theme-toggle"
-      [checked]="theme.isDark()"
-      (change)="theme.toggle()"
-    >
-      Dark mode
-    </mat-slide-toggle>
+    <div class="theme-toggle">
+      <mat-icon aria-hidden="true">light_mode</mat-icon>
+      <mat-slide-toggle
+        [checked]="theme.isDark()"
+        (change)="theme.toggle()"
+        aria-label="Toggle dark mode"
+      />
+      <mat-icon aria-hidden="true">dark_mode</mat-icon>
+    </div>
   </mat-toolbar-row>
 </mat-toolbar>
