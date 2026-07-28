@@ -21,6 +21,21 @@ html {
       density: 0,
     )
   );
+
+  @include mat.sidenav-overrides(
+    (
+      container-background-color: var(--mat-sys-secondary-container),
+    )
+  );
+
+  // Link color / hover color for mat-list-item, used by the mat-nav-list
+  @include mat.list-overrides(
+    (
+      list-item-label-text-color: var(--mat-sys-primary),
+      list-item-hover-label-text-color: var(--mat-sys-secondary),
+      list-item-label-text-weight: 500,
+    )
+  );
 }
 
 body {
