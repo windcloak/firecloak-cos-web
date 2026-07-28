@@ -1,5 +1,5 @@
 <mat-sidenav-container class="app-shell">
-  <mat-sidenav #drawer mode="over">
+  <mat-sidenav #drawer mode="over" (click)="drawer.close()">
     <mat-nav-list>
       @for (link of navLinks; track link.url) {
         <a
@@ -7,7 +7,6 @@
           [routerLink]="link.url"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: link.url === '/' }"
-          (click)="drawer.close()"
         >
           {{ link.title }}
         </a>
