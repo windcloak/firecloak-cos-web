@@ -6,12 +6,6 @@
 @use '@angular/material' as mat;
 @use './styles/theme-colors' as theme-colors;
 
-// Custom brand color, not part of the generated M3 palette — the pale
-// orange from the old site's header. Defined here by name (rather than
-// inlining the hex in the override below) so it's clear this is a
-// deliberate one-off choice, not a mistaken system token reference.
-$header-background-color: #f6d5a1;
-
 html {
   height: 100%;
 
@@ -50,10 +44,13 @@ html {
     )
   );
 
-  // Header (mat-toolbar) background color.
+  // Header (mat-toolbar) background color. Same token the sidenav uses
+  // (see mat.sidenav-overrides above), so they intentionally match in
+  // both light and dark mode — Option D from
+  // header-dark-mode-comparison.html.
   @include mat.toolbar-overrides(
     (
-      container-background-color: $header-background-color,
+      container-background-color: var(--mat-sys-secondary-container),
     )
   );
 }
