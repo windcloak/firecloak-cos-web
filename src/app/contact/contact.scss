@@ -1,0 +1,45 @@
+.contact {
+  max-width: 960px;
+  margin-inline: auto;
+  padding: 24px 16px 48px;
+  text-align: center;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 480px;
+  margin-inline: auto;
+  text-align: left;
+}
+
+// Honeypot: visually hidden (not display: none — some bots skip
+// display:none fields, so this uses the standard "clip to nothing"
+// technique instead) but still present in the DOM for bots that
+// blindly fill every field, and skipped by keyboard users via
+// tabindex="-1" on the input itself.
+.honeypot {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+.success {
+  color: var(--mat-sys-primary);
+  font-weight: 500;
+  padding-block: 24px;
+}
+
+.error {
+  color: var(--mat-sys-error);
+}
+
+button {
+  align-self: flex-start;
+  margin-block-start: 8px;
+}
+
