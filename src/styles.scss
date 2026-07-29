@@ -81,6 +81,10 @@ h1 {
   margin-block-end: 24px;
 }
 
+h2 {
+  color: var(--mat-sys-tertiary);
+}
+
 p {
   font: var(--mat-sys-body-large); // increase font for readability
 }

@@ -1,0 +1,29 @@
+.links {
+  max-width: 960px;
+  margin-inline: auto;
+  padding: 24px 16px 48px;
+}
+
+section + section {
+  margin-block-start: 32px;
+}
+
+
+.banner-links,
+.banner-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-block: 12px;
+}
+
+.kofi-link {
+  display: inline-block;
+  margin-block-start: 12px;
+}
+
+mat-nav-list {
+  a[mat-list-item] {
+    width: fit-content; // let hover match the link's own width
+  }
+}

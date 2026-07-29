@@ -1,1 +1,85 @@
-<p>links works!</p>
+<section class="links">
+  <h1>Links</h1>
+
+  <section aria-labelledby="social-heading">
+    <h2 id="social-heading">My Social Media</h2>
+
+    <mat-list>
+      @for (link of socialLinks; track link.url) {
+        <a mat-list-item [href]="link.url" target="_blank" rel="noopener">
+          <mat-icon matListItemIcon>folder</mat-icon>
+          {{ link.name }}
+        </a>
+      }
+    </mat-list>
+
+    <a href="https://ko-fi.com/D1H01CHVN" target="_blank" rel="noopener" class="kofi-link">
+      <img
+        height="40"
+        src="https://cdn.ko-fi.com/cdn/kofi2.png?v=2"
+        alt="Buy Me a Coffee at Ko-fi.com"
+      />
+    </a>
+  </section>
+
+  <section aria-labelledby="cosplayers-heading">
+    <h2 id="cosplayers-heading">Cosplayers</h2>
+
+    <div class="banner-links">
+      @for (cosplayer of otherCosplayers; track cosplayer.link) {
+        <a [href]="cosplayer.link" target="_blank" rel="noopener">
+          <img [ngSrc]="cosplayer.image" width="200" height="50" [alt]="cosplayer.name" />
+        </a>
+      }
+    </div>
+
+    <mat-nav-list>
+      @for (cosplayer of textCosplayers; track cosplayer.link) {
+        <a mat-list-item [href]="cosplayer.link" target="_blank" rel="noopener">{{
+          cosplayer.name
+        }}</a>
+      }
+    </mat-nav-list>
+  </section>
+
+  <section aria-labelledby="cosplay-stores">
+    <h2 id="cosplay-stores">Cosplay Stores</h2>
+    <mat-nav-list>
+      @for (store of cosplayStores; track store.link) {
+        <a mat-list-item [href]="store.link" target="_blank" rel="noopener">{{ store.name }}</a>
+      }
+    </mat-nav-list>
+  </section>
+
+  <section aria-labelledby="pattern-stores">
+    <h2 id="pattern-stores">Pattern Stores</h2>
+    <mat-nav-list>
+      @for (store of patternStores; track store.link) {
+        <a mat-list-item [href]="store.link" target="_blank" rel="noopener">{{ store.name }}</a>
+      }
+    </mat-nav-list>
+  </section>
+
+  <section aria-labelledby="link-me-heading">
+    <h2 id="link-me-heading">Link Me</h2>
+
+    <p>
+      Want your link here under Cosplayers? Email me at
+      <a href="mailto:xfirecloak@gmail.com">xfirecloak&#64;gmail.com</a>
+      to request a link exchange. You just have to link back to me somewhere on your site. Your
+      website must be related to cosplay in some way. You can use one of my banners below, but
+      please upload it to your own server.
+    </p>
+
+    <div class="banner-gallery">
+      @for (banner of banners; track banner; let i = $index) {
+        <img
+          [ngSrc]="banner"
+          width="200"
+          height="50"
+          [alt]="'Firecloak banner option ' + (i + 1)"
+        />
+      }
+    </div>
+  </section>
+</section>
