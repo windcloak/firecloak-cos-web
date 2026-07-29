@@ -1,1 +1,50 @@
-<p>about works!</p>
+<section class="about">
+  <h1>About Me</h1>
+
+  <div class="about-content">
+    <img
+      ngSrc="about/may.jpg"
+      width="450"
+      height="600"
+      alt="Portrait of May"
+      class="portrait"
+      priority
+    />
+
+    <div class="details">
+      <mat-list class="profile">
+        @for (profile of profiles; track profile.title) {
+          <mat-list-item>
+            <span matListItemTitle>{{ profile.title }}</span>
+            <span matListItemLine>{{ profile.description }}</span>
+          </mat-list-item>
+        }
+      </mat-list>
+    </div>
+  </div>
+
+  <div class="bio">
+    <p>
+      I'm May, and I've been cosplaying since 2010. I'm a cosplayer and photographer. I've been into
+      anime ever since I was a kid (Sailor Moon and Pokemon), so I was bound to run into cosplay
+      eventually. I found pictures of Kipi cosplaying Mio Akiyama, and wanted to try cosplay too! I
+      bought a black dress and got my mom to alter it for me, and I bought a cheap Ebay wig. I wore
+      my casual Mio to a local con, and had so much fun! Let's just say I've been addicted since
+      then.
+    </p>
+
+    <p>
+      I wear a mix of both premade costumes and handmade ones.
+      <a href="https://www.miccostumes.com/" target="_blank" rel="noopener">Miccostumes</a>
+      is my favorite brand to buy from, followed by
+      <a href="https://dokidokicos.com/" target="_blank" rel="noopener">Doki Doki Cosplay</a>. I
+      also make some costumes too! 
+    </p>
+
+    <p>
+      I style most of my wigs. I like using
+      <a href="https://www.epiccosplay.com" target="_blank" rel="noopener">Epic Cosplay Wigs</a> (US),
+      but I also buy character wigs off Aliexpress or Amazon when they're available.
+    </p>
+  </div>
+</section>

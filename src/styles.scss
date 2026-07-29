@@ -73,3 +73,38 @@ body {
   margin: 0;
   height: 100%;
 }
+
+
+h1 {
+  color: var(--mat-sys-secondary);
+  text-align: center;
+  margin-block-end: 24px;
+}
+
+p {
+  font: var(--mat-sys-body-large); // increase font for readability
+}
+
+// Default link styling for any plain <a> that doesn't already have a
+// more specific color set (e.g. header/sidenav nav links, which set
+// their own).
+//
+// Material's tonal color roles (primary/secondary/tertiary/etc.) all
+// sit at roughly the same lightness as body text in dark mode by
+// design, so color alone isn't a reliable way to tell links apart
+// from surrounding text — especially in dark mode, and for anyone
+// with a color vision deficiency. An underline plus a bolder weight
+// make links identifiable independent of color (WCAG 1.4.1).
+a {
+  color: var(--mat-sys-primary);
+  font-weight: 500;
+  text-decoration: underline;
+
+  &:visited {
+    color: var(--mat-sys-on-primary-container);
+  }
+
+  &:hover {
+    color: var(--mat-sys-secondary);
+  }
+}

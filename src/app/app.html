@@ -16,7 +16,9 @@
 
   <mat-sidenav-content>
     <app-header (menuToggle)="drawer.toggle()" />
-    <router-outlet />
+    <main>
+      <router-outlet />
+    </main>
     <app-footer />
   </mat-sidenav-content>
 </mat-sidenav-container>
