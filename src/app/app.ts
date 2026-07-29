@@ -22,4 +22,5 @@ import { NAV_LINKS } from './nav-links';
 })
 export class App {
   protected readonly navLinks = NAV_LINKS;
+
 }

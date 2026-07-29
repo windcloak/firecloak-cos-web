@@ -1,22 +1,17 @@
 import { Component } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import { MatListModule } from '@angular/material/list';
-import { MatIconModule } from '@angular/material/icon';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { SOCIAL_LINKS } from '../social-links';
 
 @Component({
   selector: 'app-links',
-  imports: [NgOptimizedImage, MatListModule, MatIconModule],
+  imports: [NgOptimizedImage, MatListModule, FontAwesomeModule],
   templateUrl: './links.html',
   styleUrl: './links.scss',
 })
 export class Links {
-  readonly socialLinks = [
-    { name: 'Instagram', url: 'https://www.instagram.com/firecloak/' },
-    { name: 'TikTok', url: 'https://www.tiktok.com/@firecloak?lang=en' },
-    { name: 'Facebook', url: 'https://www.facebook.com/firecloak' },
-    { name: 'Twitter', url: 'https://twitter.com/firecloak' },
-    { name: 'Deviantart', url: 'https://www.deviantart.com/firecloak' },
-  ];
+  readonly socialLinks = SOCIAL_LINKS;
 
   readonly otherCosplayers = [
     {

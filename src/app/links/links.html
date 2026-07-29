@@ -7,7 +7,7 @@
     <mat-list>
       @for (link of socialLinks; track link.url) {
         <a mat-list-item [href]="link.url" target="_blank" rel="noopener">
-          <mat-icon matListItemIcon>folder</mat-icon>
+          <fa-icon matListItemIcon [icon]="link.icon" />
           {{ link.name }}
         </a>
       }
@@ -67,8 +67,7 @@
       Want your link here under Cosplayers? Email me at
       <a href="mailto:xfirecloak@gmail.com">xfirecloak&#64;gmail.com</a>
       to request a link exchange. You just have to link back to me somewhere on your site. Your
-      website must be related to cosplay in some way. You can use one of my banners below, but
-      please upload it to your own server.
+      website must be a cosplay site. You can use one of my banners below or use a text link.
     </p>
 
     <div class="banner-gallery">

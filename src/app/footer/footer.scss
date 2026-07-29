@@ -26,4 +26,11 @@
       color: var(--mat-sys-primary);
     }
   }
+
+  // fa-icon sizes off font-size (like a webfont glyph), unlike the
+  // raw SVGs it replaced, which had explicit width/height. This
+  // matches their old 24px size.
+  fa-icon {
+    font-size: 24px;
+  }
 }
