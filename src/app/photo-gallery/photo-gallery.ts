@@ -1,4 +1,4 @@
-import { Component, DestroyRef, ElementRef, effect, inject, input, viewChild } from '@angular/core';
+import { Component, ElementRef, afterRenderEffect, input, viewChild } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import PhotoSwipeLightbox from 'photoswipe/lightbox';
 
@@ -31,31 +31,32 @@ export class PhotoGallery {
   photos = input.required<GalleryPhoto[]>();
 
   private readonly galleryEl = viewChild<ElementRef<HTMLElement>>('galleryEl');
-  private lightbox?: PhotoSwipeLightbox;
 
   constructor() {
-    // Re-runs whenever the gallery's DOM container becomes available or
-    // the photo list changes — e.g. this same component instance gets
-    // reused when navigating from one cosplay's detail page to another's.
-    effect(() => {
+    // afterRenderEffect (unlike a plain effect()) only ever runs in the
+    // browser, never during SSR — PhotoSwipe reaches for `document`
+    // directly, which doesn't exist on the server and would otherwise
+    // crash the SSR render. It re-runs whenever the gallery's DOM
+    // container becomes available or the photo list changes (e.g. this
+    // same component instance gets reused navigating between two
+    // cosplays' detail pages), and onCleanup tears down the previous
+    // lightbox instance both on re-run and on component destroy.
+    afterRenderEffect((onCleanup) => {
       const el = this.galleryEl()?.nativeElement;
       const photos = this.photos();
-
-      this.lightbox?.destroy();
-      this.lightbox = undefined;
 
       if (!el || photos.length === 0) {
         return;
       }
 
-      this.lightbox = new PhotoSwipeLightbox({
+      const lightbox = new PhotoSwipeLightbox({
         gallery: el,
         children: 'a',
         pswpModule: () => import('photoswipe'),
       });
-      this.lightbox.init();
-    });
+      lightbox.init();
 
-    inject(DestroyRef).onDestroy(() => this.lightbox?.destroy());
+      onCleanup(() => lightbox.destroy());
+    });
   }
 }
