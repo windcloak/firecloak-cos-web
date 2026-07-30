@@ -1,5 +1,7 @@
 import { Component, computed, inject, input, resource } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { catchError, firstValueFrom, of } from 'rxjs';
 import { MatListModule } from '@angular/material/list';
 import { Cosplays } from '../cosplays';
 import { stripAssetsPrefix } from '../legacy-image-path';
@@ -20,6 +22,7 @@ type DimensionsManifest = Record<string, { width: number; height: number }>;
 })
 export class CosplayDetails {
   private readonly cosplaysService = inject(Cosplays);
+  private readonly http = inject(HttpClient);
 
   id = input<string>();
 
@@ -34,13 +37,19 @@ export class CosplayDetails {
 
   // dimensions.json lives alongside that cosplay's own images in the
   // public folder, so it's just a static file fetch — no Firestore or
-  // Angular service involved.
+  // Angular service involved. Uses HttpClient rather than a bare
+  // fetch() because this app renders on the server too: fetch() can't
+  // resolve a relative URL with no page to resolve it against and
+  // throws "Failed to parse URL" during SSR, while HttpClient knows
+  // how to resolve relative URLs correctly in both contexts.
   protected readonly dimensionsResource = resource({
     params: () => this.id(),
-    loader: async ({ params }): Promise<DimensionsManifest> => {
-      const response = await fetch(`cosplay/${params}/dimensions.json`);
-      return response.ok ? await response.json() : {};
-    },
+    loader: ({ params }) =>
+      firstValueFrom(
+        this.http
+          .get<DimensionsManifest>(`cosplay/${params}/dimensions.json`)
+          .pipe(catchError(() => of<DimensionsManifest>({}))),
+      ),
   });
 
   // mainImgUrl is a leftover from the old app's Firestore data, e.g.

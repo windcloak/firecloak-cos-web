@@ -4,6 +4,12 @@
   padding: 24px 16px 48px;
 }
 
+.loading {
+  display: flex;
+  justify-content: center;
+  padding-block: 48px;
+}
+
 .search {
   display: block;
   max-width: 360px;
