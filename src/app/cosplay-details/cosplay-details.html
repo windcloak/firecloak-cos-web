@@ -1,1 +1,64 @@
-<p>cosplay-details works!</p>
+<section class="cosplay-details">
+  @if (cosplayResource.isLoading()) {
+    <p>Loading…</p>
+  } @else if (cosplayResource.error()) {
+    <p class="error">Something went wrong loading this cosplay — please try again later.</p>
+  } @else if (!cosplayResource.hasValue()) {
+    <p class="error">Cosplay not found.</p>
+  } @else {
+    @let cosplay = cosplayResource.value();
+
+    <h1>{{ cosplay.name }} – {{ cosplay.series }} Cosplay</h1>
+
+    <p class="description">{{ cosplay.description }}</p>
+
+    <h2>Tutorial: How to Make {{ cosplay.name }}</h2>
+    <ul class="notes">
+      @for (note of cosplay.notes; track note.title) {
+        <li>
+          <b>{{ note.title }}:</b>
+          @if (note.link) {
+            <a [href]="note.link" target="_blank" rel="noopener">[link]</a>
+          }
+          {{ note.description }}
+        </li>
+      }
+      <li><b>Debut:</b> {{ cosplay.year }}</li>
+    </ul>
+
+    <div class="credits">
+      <div>
+        <h3>Photographers</h3>
+        <ul>
+          @for (photog of cosplay.photographer; track photog.name) {
+            <li>
+              @if (photog.link) {
+                <a [href]="photog.link" target="_blank" rel="noopener">{{ photog.name }}</a>
+              } @else {
+                {{ photog.name }}
+              }
+            </li>
+          }
+        </ul>
+      </div>
+
+      @if (cosplay.cosplayers?.length) {
+        <div>
+          <h3>Cosplayers</h3>
+          <ul>
+            @for (cos of cosplay.cosplayers; track cos.name) {
+              <li>
+                @if (cos.link) {
+                  <a [href]="cos.link" target="_blank" rel="noopener">{{ cos.name }}</a>
+                } @else {
+                  {{ cos.name }}
+                }
+                – {{ cos.char }}
+              </li>
+            }
+          </ul>
+        </div>
+      }
+    </div>
+  }
+</section>

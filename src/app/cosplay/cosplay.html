@@ -1,1 +1,35 @@
-<p>cosplay works!</p>
+<section class="cosplay-list">
+  <h1>Cosplays</h1>
+
+  @if (cosplaysResource.isLoading()) {
+    <p>Loading…</p>
+  } @else if (cosplaysResource.error()) {
+    <p class="error">Something went wrong loading cosplays — please try again later.</p>
+  } @else {
+    <mat-form-field class="search">
+      <mat-label>Search</mat-label>
+      <input matInput [(ngModel)]="term" placeholder="character or series" />
+    </mat-form-field>
+
+    <div class="grid">
+      @for (cosplay of filteredCosplays(); track cosplay.id) {
+        <a class="card-link" [routerLink]="['/cosplay', cosplay.id]">
+          <mat-card class="card">
+            <img
+              matCardImage
+              [ngSrc]="'cosplay/' + cosplay.id + '/icon.jpg'"
+              width="500"
+              height="643"
+              class="card-media"
+              [alt]="cosplay.name"
+            />
+            <mat-card-content>
+              <h2>{{ cosplay.name }}</h2>
+              <p class="series">{{ cosplay.series }}</p>
+            </mat-card-content>
+          </mat-card>
+        </a>
+      }
+    </div>
+  }
+</section>

@@ -1,0 +1,40 @@
+.cosplay-details {
+  max-width: 720px;
+  margin-inline: auto;
+  padding: 24px 16px 48px;
+}
+
+.description {
+  line-height: 1.6;
+}
+
+.notes {
+  padding-inline-start: 20px;
+
+  li {
+    padding-block: 4px;
+  }
+}
+
+.credits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  margin-block-start: 24px;
+
+  h3 {
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-block-end: 8px;
+  }
+
+  ul {
+    margin: 0;
+    padding-inline-start: 20px;
+  }
+}
+
+.error {
+  color: var(--mat-sys-error);
+}
