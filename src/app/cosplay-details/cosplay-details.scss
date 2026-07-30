@@ -1,10 +1,37 @@
 .cosplay-details {
-  max-width: 720px;
+  max-width: 1000px;
   margin-inline: auto;
   padding: 24px 16px 48px;
 }
 
+.hero {
+  display: flex;
+  gap: 24px;
+  margin-block-end: 8px;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+  }
+}
+
+.main-img {
+  // No forced box or crop — each image keeps its own real aspect
+  // ratio and renders at its natural size, just capped so it can't
+  // blow out the layout on a big source photo.
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  border-radius: 8px;
+
+  @media (min-width: 601px) {
+    max-width: 550px; // max size of main cosplay image
+  }
+}
+
 .description {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
   line-height: 1.6;
 }
 

@@ -1,10 +1,11 @@
-import { Component, inject, input, resource } from '@angular/core';
+import { Component, computed, inject, input, resource } from '@angular/core';
+import { NgOptimizedImage } from '@angular/common';
 import { MatListModule } from '@angular/material/list';
 import { Cosplays } from '../cosplays';
 
 @Component({
   selector: 'app-cosplay-details',
-  imports: [MatListModule],
+  imports: [MatListModule, NgOptimizedImage],
   templateUrl: './cosplay-details.html',
   styleUrl: './cosplay-details.scss',
 })
@@ -21,4 +22,12 @@ export class CosplayDetails {
     params: () => this.id(),
     loader: ({ params }) => this.cosplaysService.byId(params),
   });
+
+  // mainImgUrl is a leftover from the old app's Firestore data, e.g.
+  // "assets/cosplay/{id}/1.jpg" — the new app serves images straight
+  // from the public root (no "assets/" folder), so we strip that prefix
+  // rather than migrating every document in Firestore.
+  protected readonly mainImgSrc = computed(() =>
+    this.cosplayResource.value()?.mainImgUrl?.replace(/^assets\//, ''),
+  );
 }

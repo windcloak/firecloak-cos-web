@@ -10,9 +10,15 @@
 
     <h1>{{ cosplay.name }} – {{ cosplay.series }} Cosplay</h1>
 
-    <p class="description">{{ cosplay.description }}</p>
+    <div class="hero">
+      @if (mainImgSrc(); as src) {
+        <img [ngSrc]="src" width="720" height="1080" class="main-img" [alt]="cosplay.name" priority />
+      }
 
-    <h2>{{ cosplay.name }} Cosplay Notes</h2>
+      <p class="description">{{ cosplay.description }}</p>
+    </div>
+
+    <h2>Construction Notes</h2>
 
     <mat-list role="list" class="notes">
       @for (note of cosplay.notes; track note.title) {
@@ -28,11 +34,11 @@
       }
     </mat-list>
 
-    <h2>Credits</h2>
+
 
     <div class="credits">
       <div>
-        <h3>Photographers</h3>
+        <h2>Photographers</h2>
         <mat-list role="list">
           @for (photog of cosplay.photographer; track photog.name) {
             <mat-list-item role="listitem">
@@ -48,7 +54,7 @@
 
       @if (cosplay.cosplayers?.length) {
         <div>
-          <h3>Cosplayers</h3>
+          <h2>Cosplayers</h2>
           <mat-list role="list">
             @for (cos of cosplay.cosplayers; track cos.name) {
               <mat-list-item role="listitem">
