@@ -1,9 +1,10 @@
 import { Component, inject, input, resource } from '@angular/core';
+import { MatListModule } from '@angular/material/list';
 import { Cosplays } from '../cosplays';
 
 @Component({
   selector: 'app-cosplay-details',
-  imports: [],
+  imports: [MatListModule],
   templateUrl: './cosplay-details.html',
   styleUrl: './cosplay-details.scss',
 })

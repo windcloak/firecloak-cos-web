@@ -12,51 +12,55 @@
 
     <p class="description">{{ cosplay.description }}</p>
 
-    <h2>Tutorial: How to Make {{ cosplay.name }}</h2>
-    <ul class="notes">
+    <h2>{{ cosplay.name }} Cosplay Notes</h2>
+
+    <mat-list role="list" class="notes">
       @for (note of cosplay.notes; track note.title) {
-        <li>
-          <b>{{ note.title }}:</b>
-          @if (note.link) {
-            <a [href]="note.link" target="_blank" rel="noopener">[link]</a>
-          }
-          {{ note.description }}
-        </li>
+        <mat-list-item role="listitem">
+          <span matListItemTitle
+            >{{ note.title }}
+            @if (note.link) {
+              <a [href]="note.link" target="_blank" rel="noopener">[link]</a>
+            }</span
+          >
+          <span matListItemLine>{{ note.description }}</span>
+        </mat-list-item>
       }
-      <li><b>Debut:</b> {{ cosplay.year }}</li>
-    </ul>
+    </mat-list>
+
+    <h2>Credits</h2>
 
     <div class="credits">
       <div>
         <h3>Photographers</h3>
-        <ul>
+        <mat-list role="list">
           @for (photog of cosplay.photographer; track photog.name) {
-            <li>
+            <mat-list-item role="listitem">
               @if (photog.link) {
                 <a [href]="photog.link" target="_blank" rel="noopener">{{ photog.name }}</a>
               } @else {
                 {{ photog.name }}
               }
-            </li>
+            </mat-list-item>
           }
-        </ul>
+        </mat-list>
       </div>
 
       @if (cosplay.cosplayers?.length) {
         <div>
           <h3>Cosplayers</h3>
-          <ul>
+          <mat-list role="list">
             @for (cos of cosplay.cosplayers; track cos.name) {
-              <li>
+              <mat-list-item role="listitem">
                 @if (cos.link) {
                   <a [href]="cos.link" target="_blank" rel="noopener">{{ cos.name }}</a>
                 } @else {
                   {{ cos.name }}
                 }
                 – {{ cos.char }}
-              </li>
+              </mat-list-item>
             }
-          </ul>
+          </mat-list>
         </div>
       }
     </div>
