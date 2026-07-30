@@ -1,9 +1,7 @@
 <section class="cosplay-list">
   <h1>Cosplays</h1>
   @if (cosplaysResource.isLoading()) {
-    <div class="loading">
-      <mat-spinner />
-    </div>
+    <app-loading-spinner />
   } @else if (cosplaysResource.error()) {
     <p class="error">Something went wrong loading cosplays — please try again later.</p>
   } @else {

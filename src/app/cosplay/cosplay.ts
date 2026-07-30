@@ -5,8 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Cosplays } from '../cosplays';
+import { LoadingSpinner } from '../loading-spinner/loading-spinner';
 
 @Component({
   selector: 'app-cosplay',
@@ -17,7 +17,7 @@ import { Cosplays } from '../cosplays';
     MatFormFieldModule,
     MatInputModule,
     MatCardModule,
-    MatProgressSpinnerModule,
+    LoadingSpinner,
   ],
   templateUrl: './cosplay.html',
   styleUrl: './cosplay.scss',

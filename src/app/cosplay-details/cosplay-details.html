@@ -1,6 +1,6 @@
 <section class="cosplay-details">
   @if (cosplayResource.isLoading()) {
-    <p>Loading…</p>
+    <app-loading-spinner />
   } @else if (cosplayResource.error()) {
     <p class="error">Something went wrong loading this cosplay — please try again later.</p>
   } @else if (!cosplayResource.hasValue()) {
