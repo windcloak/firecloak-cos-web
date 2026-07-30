@@ -12,11 +12,28 @@
 
     <div class="hero">
       @if (mainImgSrc(); as src) {
-        <img [ngSrc]="src" width="720" height="1080" class="main-img" [alt]="cosplay.name" priority />
+        <img
+          [ngSrc]="src"
+          width="720"
+          height="1080"
+          class="main-img"
+          [alt]="cosplay.name"
+          priority
+        />
       }
 
       <p class="description">{{ cosplay.description }}</p>
     </div>
+
+    @if (galleryPhotos().length) {
+      <h2>Gallery</h2>
+      <app-photo-gallery [photos]="galleryPhotos()" />
+    }
+
+    @if (wipPhotos().length) {
+      <h2>Work in Progress</h2>
+      <app-photo-gallery [photos]="wipPhotos()" />
+    }
 
     <h2>Construction Notes</h2>
 
@@ -27,14 +44,12 @@
             >{{ note.title }}
             @if (note.link) {
               <a [href]="note.link" target="_blank" rel="noopener">[link]</a>
-            }</span
-          >
+            }
+          </span>
           <span matListItemLine>{{ note.description }}</span>
         </mat-list-item>
       }
     </mat-list>
-
-
 
     <div class="credits">
       <div>

@@ -1,0 +1,21 @@
+<div class="gallery" #galleryEl>
+  @for (photo of photos(); track photo.fullSrc) {
+    <a
+      class="gallery-item"
+      [href]="photo.fullSrc"
+      [attr.data-pswp-width]="photo.fullWidth"
+      [attr.data-pswp-height]="photo.fullHeight"
+      [attr.data-pswp-srcset]="photo.fullSrcset"
+      [attr.data-cropped]="true"
+      target="_blank"
+    >
+      <img
+        [ngSrc]="photo.thumbSrc"
+        [width]="photo.thumbWidth"
+        [height]="photo.thumbHeight"
+        [alt]="photo.alt"
+        class="thumb"
+      />
+    </a>
+  }
+</div>

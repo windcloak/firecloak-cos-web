@@ -15,16 +15,13 @@
 }
 
 .main-img {
-  // No forced box or crop — each image keeps its own real aspect
-  // ratio and renders at its natural size, just capped so it can't
-  // blow out the layout on a big source photo.
   width: auto;
   height: auto;
   max-width: 100%;
   border-radius: 8px;
 
   @media (min-width: 601px) {
-    max-width: 550px; // max size of main cosplay image
+    max-width: 700px; // max size of main cosplay image
   }
 }
 
