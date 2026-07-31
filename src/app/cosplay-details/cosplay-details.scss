@@ -35,6 +35,7 @@
 .notes {
   --mat-list-list-item-label-text-weight: 700;
   --mat-list-list-item-label-text-color: var(--mat-sys-tertiary);
+  --mat-list-list-item-supporting-text-size: 1rem;  // font size for note description
 
   // lets the note description wrap instead of getting truncated
   .mdc-list-item {
