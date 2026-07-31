@@ -43,11 +43,12 @@
         <mat-list-item role="listitem">
           <span matListItemTitle
             >{{ note.title }}
-            @if (note.link) {
-              <a [href]="note.link" target="_blank" rel="noopener">[link]</a>
-            }
           </span>
-          <span matListItemLine>{{ note.description }}</span>
+          @if (note.link) {
+            <a matListItemLine [href]="note.link" target="_blank" rel="noopener">{{ note.description }}</a>
+          } @else {
+            <span matListItemLine>{{ note.description }}</span>
+          }
         </mat-list-item>
       }
     </mat-list>
