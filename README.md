@@ -28,5 +28,5 @@ You do need a fresh ng build (and redeploy) each time — a previously built dis
 # Resizing Thumbnails
 
 small - max width 270px, max height 500px at 80% quality
-medium - max width 800px, max height 800px at 85% quality
+medium - max width 800px, max height 800px at 90% quality
 large - max width 1500px, max height 1000px at 90% quality
