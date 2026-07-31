@@ -1,1 +1,35 @@
-<p>tutorials works!</p>
+<section class="tutorials-list">
+  <h1>Tutorials</h1>
+
+  @if (tutorialsResource.isLoading()) {
+    <app-loading-spinner />
+  } @else if (tutorialsResource.error()) {
+    <p class="error">Something went wrong loading tutorials — please try again later.</p>
+  } @else {
+    <mat-form-field class="search">
+      <mat-label>Search</mat-label>
+      <input matInput [(ngModel)]="term" placeholder="cosplay or prop name" />
+    </mat-form-field>
+
+    <div class="grid">
+      @for (tutorial of filteredTutorials(); track tutorial.id) {
+        <a class="card-link" [routerLink]="['/tutorials', tutorial.id]">
+          <mat-card class="card">
+            <img
+              matCardImage
+              [ngSrc]="'tutorials/' + tutorial.id + '/icon.jpg'"
+              width="500"
+              height="500"
+              class="card-media"
+              [alt]="tutorial.name"
+            />
+            <mat-card-content>
+              <h2>{{ tutorial.name }}</h2>
+              <p class="series">{{ tutorial.description }}</p>
+            </mat-card-content>
+          </mat-card>
+        </a>
+      }
+    </div>
+  }
+</section>
