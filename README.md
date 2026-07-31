@@ -11,6 +11,7 @@
 - [Font Awesome](https://fontawesome.com/) - icons
 - [fslightbox.js](https://fslightbox.com/) - lightbox for galleries
 - Claude Code - AI assistant
+- [Easy Thumbnails](https://www.fookes.com/easy-thumbnails) - resize images
 
 # Angular Material Theme
 
@@ -23,3 +24,9 @@ Run this any time you add or change gallery photos. It's a plain Node script tha
 `npm run generate:dimensions`
 
 You do need a fresh ng build (and redeploy) each time — a previously built dist/ folder won't contain images you add to public/ afterward, since that copy only happens during build.
+
+# Resizing Thumbnails
+
+small - max width 270px, max height 500px at 80% quality
+medium - max width 800px, max height 800px at 85% quality
+large - max width 1500px, max height 1000px at 90% quality
