@@ -20,7 +20,7 @@ interface StepImage {
 }
 
 
-const PLACEHOLDER_SRC = 'tutorials/placeholder.gif';
+const PLACEHOLDER_SRC = 'placeholder.gif';
 
 @Component({
   selector: 'app-tutorial-details',

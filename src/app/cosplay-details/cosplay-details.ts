@@ -15,6 +15,8 @@ import { LoadingSpinner } from '../loading-spinner/loading-spinner';
 // thousands of existing photos.
 type DimensionsManifest = Record<string, { width: number; height: number }>;
 
+const PLACEHOLDER_SRC = 'placeholder.gif';
+
 @Component({
   selector: 'app-cosplay-details',
   imports: [MatListModule, NgOptimizedImage, PhotoGallery, LoadingSpinner],
@@ -24,6 +26,8 @@ type DimensionsManifest = Record<string, { width: number; height: number }>;
 export class CosplayDetails {
   private readonly cosplaysService = inject(Cosplays);
   private readonly http = inject(HttpClient);
+
+  protected readonly placeholderSrc = PLACEHOLDER_SRC;
 
   id = input<string>();
 
