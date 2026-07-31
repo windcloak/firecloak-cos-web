@@ -12,6 +12,5 @@ export const NAV_LINKS: NavLink[] = [
   { title: 'Cosplay', url: '/cosplay' },
   { title: 'Tutorials', url: '/tutorials' },
   { title: 'Contact', url: '/contact' },
-  { title: 'Reviews', url: '/reviews' },
   { title: 'Links', url: '/links' },
 ];

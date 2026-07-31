@@ -37,11 +37,6 @@ export const routes: Routes = [
     loadComponent: () => import('./contact/contact').then(m => m.Contact),
   },
   {
-    path: 'reviews',
-    title: 'Firecloak - Reviews',
-    loadComponent: () => import('./reviews/reviews').then(m => m.Reviews),
-  },
-  {
     path: 'links',
     title: 'Firecloak - Links',
     loadComponent: () => import('./links/links').then(m => m.Links),
