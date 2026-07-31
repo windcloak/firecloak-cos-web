@@ -13,22 +13,14 @@
 
     <div class="grid">
       @for (tutorial of filteredTutorials(); track tutorial.id) {
-        <a class="card-link" [routerLink]="['/tutorials', tutorial.id]">
-          <mat-card class="card">
-            <img
-              matCardImage
-              [ngSrc]="'tutorials/' + tutorial.id + '/icon.jpg'"
-              width="500"
-              height="500"
-              class="card-media"
-              [alt]="tutorial.name"
-            />
-            <mat-card-content>
-              <h2>{{ tutorial.name }}</h2>
-              <p class="series">{{ tutorial.description }}</p>
-            </mat-card-content>
-          </mat-card>
-        </a>
+        <app-preview-card
+          [routerLink]="['/tutorials', tutorial.id]"
+          [imageSrc]="'tutorials/' + tutorial.id + '/icon.jpg'"
+          [imageWidth]="500"
+          [imageHeight]="500"
+          [title]="tutorial.name"
+          [subtitle]="tutorial.description"
+        />
       }
     </div>
   }

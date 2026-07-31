@@ -1,24 +1,14 @@
 import { Component, computed, inject, resource, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { NgOptimizedImage } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatCardModule } from '@angular/material/card';
 import { Cosplays } from '../cosplays';
 import { LoadingSpinner } from '../loading-spinner/loading-spinner';
+import { PreviewCard } from '../preview-card/preview-card';
 
 @Component({
   selector: 'app-cosplay',
-  imports: [
-    RouterLink,
-    NgOptimizedImage,
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatCardModule,
-    LoadingSpinner,
-  ],
+  imports: [FormsModule, MatFormFieldModule, MatInputModule, LoadingSpinner, PreviewCard],
   templateUrl: './cosplay.html',
   styleUrl: './cosplay.scss',
 })

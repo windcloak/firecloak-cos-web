@@ -1,0 +1,17 @@
+<a class="card-link" [routerLink]="routerLink()">
+  <mat-card class="card">
+    <img
+      matCardImage
+      [ngSrc]="imageSrc()"
+      [width]="imageWidth()"
+      [height]="imageHeight()"
+      [style.aspect-ratio]="imageWidth() + ' / ' + imageHeight()"
+      class="card-media"
+      [alt]="title()"
+    />
+    <mat-card-content>
+      <h2>{{ title() }}</h2>
+      <p class="subtitle">{{ subtitle() }}</p>
+    </mat-card-content>
+  </mat-card>
+</a>

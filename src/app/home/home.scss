@@ -1,36 +1,135 @@
-.results {
-  display: grid;
-  column-gap: 14px;
-  row-gap: 14px;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 400px));
-  margin-top: 50px;
-  justify-content: space-around;
+.home {
+  max-width: 1400px;
+  margin-inline: auto;
+  padding: 24px 16px 48px;
 }
-input[type="text"] {
-  border: solid 1px var(--mat-sys-primary);
-  padding: 10px;
+
+.hero {
+  position: relative;
+  max-width: 950px;
+  margin: 0 auto 40px;
   border-radius: 8px;
-  margin-right: 4px;
-  display: inline-block;
-  width: 30%;
+  overflow: hidden;
+  background-color: var(--mat-sys-surface-variant);
 }
-button {
-  padding: 10px;
-  border: solid 1px var(--mat-sys-primary);
-  background: var(--mat-sys-primary);
-  color: var(--mat-sys-on-primary);
-  border-radius: 8px;
+
+.hero-track {
+  display: flex;
+  transition: transform 0.4s ease;
 }
-@media (min-width: 500px) and (max-width: 768px) {
-  .results {
-      grid-template-columns: repeat(2, 1fr);
+
+.hero-slide {
+  position: relative;
+  flex: 0 0 100%;
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.hero-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 950 / 633;
+  object-fit: cover;
+}
+
+.hero-caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 20px 24px 40px;
+  color: #fff;
+  text-align: center;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8) 35%, rgba(0, 0, 0, 0));
+
+  h2 {
+    margin: 0;
+    color: #fff;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
   }
-  input[type="text"] {
-      width: 70%;
-  }   
+
+  p {
+    margin: 4px 0 0;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+  }
+
+  @media (max-width: 600px) {
+    display: none;
+  }
 }
-@media (max-width: 499px) {
-  .results {
-      grid-template-columns: 1fr;
-  }    
+
+.hero-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+
+  &:hover {
+    color: rgba(255, 255, 255, 0.75);
+  }
+}
+
+.hero-arrow-prev {
+  left: 8px;
+}
+
+.hero-arrow-next {
+  right: 8px;
+}
+
+.hero-dots {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+}
+
+.hero-dot {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+
+  &.active {
+    background: #fff;
+  }
+}
+
+.preview-section {
+  margin-top: 48px;
+}
+
+// Previews always show at most 4 cards (Cosplays.preview()/
+// TutorialsService.preview() are both hardcoded to 4), so this wrap is
+// sized to fit exactly 4 cards at their max width — 4 * 280px card +
+// 3 * 16px gaps — and centered. That keeps the "More" link's right
+// edge lined up with the last card instead of the wider section box.
+.preview-grid-wrap {
+  max-width: 1168px;
+  margin-inline: auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 280px));
+  justify-content: center;
+  gap: 16px;
+}
+
+.more-link {
+  margin-top: 16px;
+  text-align: right;
+}
+
+.error {
+  color: var(--mat-sys-error);
 }

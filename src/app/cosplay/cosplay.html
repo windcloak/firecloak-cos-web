@@ -12,22 +12,14 @@
 
     <div class="grid">
       @for (cosplay of filteredCosplays(); track cosplay.id) {
-        <a class="card-link" [routerLink]="['/cosplay', cosplay.id]">
-          <mat-card class="card">
-            <img
-              matCardImage
-              [ngSrc]="'cosplay/' + cosplay.id + '/icon.jpg'"
-              width="500"
-              height="643"
-              class="card-media"
-              [alt]="cosplay.name"
-            />
-            <mat-card-content>
-              <h2>{{ cosplay.name }}</h2>
-              <p class="series">{{ cosplay.series }}</p>
-            </mat-card-content>
-          </mat-card>
-        </a>
+        <app-preview-card
+          [routerLink]="['/cosplay', cosplay.id]"
+          [imageSrc]="'cosplay/' + cosplay.id + '/icon.jpg'"
+          [imageWidth]="500"
+          [imageHeight]="643"
+          [title]="cosplay.name"
+          [subtitle]="cosplay.series"
+        />
       }
     </div>
   }

@@ -1,3 +1,111 @@
-<section>
-Home page
+<section class="home">
+  <div
+    class="hero"
+    (touchstart)="onTouchStart($event)"
+    (touchmove)="onTouchMove($event)"
+    (touchend)="onTouchEnd()"
+  >
+    <div class="hero-track" [style.transform]="'translateX(-' + currentSlide() * 100 + '%)'">
+      @for (slide of slides; track slide.id; let i = $index) {
+        <a class="hero-slide" [routerLink]="['/cosplay', slide.id]" (click)="onSlideClick($event)">
+          <img
+            [ngSrc]="'home/slideshow' + (i + 1) + '.jpg'"
+            width="950"
+            height="633"
+            class="hero-img"
+            [alt]="slide.character + ' — ' + slide.series"
+            [priority]="i === 0"
+          />
+          <div class="hero-caption">
+            <h2>{{ slide.character }}</h2>
+            <p>{{ slide.series }}</p>
+          </div>
+        </a>
+      }
+    </div>
+
+    <button
+      type="button"
+      mat-icon-button
+      class="hero-arrow hero-arrow-prev"
+      aria-label="Previous slide"
+      (click)="previousSlide()"
+    >
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+    <button
+      type="button"
+      mat-icon-button
+      class="hero-arrow hero-arrow-next"
+      aria-label="Next slide"
+      (click)="nextSlide()"
+    >
+      <mat-icon>chevron_right</mat-icon>
+    </button>
+
+    <div class="hero-dots">
+      @for (slide of slides; track slide.id; let i = $index) {
+        <button
+          type="button"
+          class="hero-dot"
+          [class.active]="i === currentSlide()"
+          [attr.aria-current]="i === currentSlide() ? 'true' : null"
+          [attr.aria-label]="'Go to slide ' + (i + 1)"
+          (click)="goToSlide(i)"
+        ></button>
+      }
+    </div>
+  </div>
+
+  <section class="preview-section">
+    <h1>Latest Cosplays</h1>
+
+    @if (cosplaysResource.isLoading()) {
+      <app-loading-spinner />
+    } @else if (cosplaysResource.error()) {
+      <p class="error">Something went wrong loading cosplays — please try again later.</p>
+    } @else {
+      <div class="preview-grid-wrap">
+        <div class="grid">
+          @for (cosplay of cosplaysResource.value(); track cosplay.id) {
+            <app-preview-card
+              [routerLink]="['/cosplay', cosplay.id]"
+              [imageSrc]="'cosplay/' + cosplay.id + '/icon.jpg'"
+              [imageWidth]="500"
+              [imageHeight]="643"
+              [title]="cosplay.name"
+              [subtitle]="cosplay.series"
+            />
+          }
+        </div>
+        <p class="more-link"><a [routerLink]="['/cosplay']">More Cosplays »</a></p>
+      </div>
+    }
+  </section>
+
+  <section class="preview-section">
+    <h1>Latest Tutorials</h1>
+
+    @if (tutorialsResource.isLoading()) {
+      <app-loading-spinner />
+    } @else if (tutorialsResource.error()) {
+      <p class="error">Something went wrong loading tutorials — please try again later.</p>
+    } @else {
+      <div class="preview-grid-wrap">
+        <div class="grid">
+          @for (tutorial of tutorialsResource.value(); track tutorial.id) {
+            <app-preview-card
+              [routerLink]="['/tutorials', tutorial.id]"
+              [imageSrc]="'tutorials/' + tutorial.id + '/icon.jpg'"
+              [imageWidth]="500"
+              [imageHeight]="500"
+              [title]="tutorial.name"
+              [subtitle]="tutorial.description"
+            />
+          }
+        </div>
+        <p class="more-link"><a [routerLink]="['/tutorials']">More Tutorials »</a></p>
+      </div>
+    }
+  </section>
 </section>
