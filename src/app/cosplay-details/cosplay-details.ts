@@ -97,13 +97,22 @@ export class CosplayDetails {
       const src = stripAssetsPrefix(wip.img) ?? '';
       return this.toGalleryPhoto({
         id,
-        thumbSrc: src,
+        thumbSrc: this.wipThumbSrc(src),
         fullSrc: src,
         alt: wip.desc || `${cosplay.name} WIP photo ${i + 1}`,
         caption: wip.desc,
       });
     });
   });
+
+  // WIP photos only ever get a single "img" field in Firestore (unlike
+  // the main gallery's separate big/small/medium fields), so rather
+  // than migrating every existing document, the small/thumbnail
+  // variant's path is derived straight from that one field — it's just
+  // the same filename under a "wip/s/" folder instead of "wip/".
+  private wipThumbSrc(src: string): string {
+    return src.replace(/\/wip\/([^/]+)$/, '/wip/s/$1');
+  }
 
   // Looks up each image's real size in dimensions.json, keyed by its
   // path relative to that cosplay's own folder (e.g. "s/1.jpg"). Falls
