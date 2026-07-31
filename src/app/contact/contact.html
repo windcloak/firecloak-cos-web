@@ -5,7 +5,7 @@
     <p class="success">Thanks for reaching out! I'll get back to you soon.</p>
     <button mat-stroked-button type="button" (click)="sendAnother()">Send another message</button>
   } @else {
-    <p>Got a question? Fill out the form below and I'll get back to you as soon as I can.</p>
+    <p>Got a question or request? Fill out the form below and I'll get back to you as soon as I can.</p>
 
     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="contact-form" novalidate>
       <mat-form-field>

@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Firecloak theme colors</title>
+<style>
+  body {
+    font-family: system-ui, sans-serif;
+    background: #fafafa;
+    margin: 0;
+    padding: 24px;
+    color: #222;
+  }
+  h1 { font-size: 1.4rem; margin-bottom: 4px; }
+  p.sub { color: #666; margin-top: 0; margin-bottom: 24px; }
+  h2 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #555;
+    margin-top: 32px;
+    margin-bottom: 8px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+  }
+  .swatch {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    background: white;
+  }
+  .colors { display: flex; height: 64px; }
+  .colors div { flex: 1; }
+  .label {
+    padding: 8px 10px;
+    font-size: 0.8rem;
+  }
+  .token { font-weight: 600; display: block; }
+  .hex { color: #666; font-family: monospace; font-size: 0.75rem; }
+  .mode-tag {
+    font-size: 0.65rem;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 4px;
+    position: relative;
+    top: 4px;
+    left: 4px;
+    background: rgba(0,0,0,0.35);
+  }
+</style>
+</head>
+<body>
+  <h1>Firecloak theme — mat.theme() color tokens</h1>
+  <p class="sub">Generated from your styles.scss compile output. Left half of each swatch = light mode, right half = dark mode. Use the token name (e.g. <code>--mat-sys-primary-container</code>) directly in CSS via <code>var(...)</code>, or in a <code>mat.*-overrides()</code> mixin.</p>
+
+  <h2>Primary</h2>
+  <div class="grid" id="primary"></div>
+
+  <h2>Secondary</h2>
+  <div class="grid" id="secondary"></div>
+
+  <h2>Tertiary</h2>
+  <div class="grid" id="tertiary"></div>
+
+  <h2>Error</h2>
+  <div class="grid" id="error"></div>
+
+  <h2>Surface &amp; background</h2>
+  <div class="grid" id="surface"></div>
+
+  <h2>Outline &amp; misc</h2>
+  <div class="grid" id="misc"></div>
+
+<script>
+const tokens = {
+  primary: [
+    ["--mat-sys-primary", "#914568", "#ffb0d0"],
+    ["--mat-sys-on-primary", "#ffffff", "#581739"],
+    ["--mat-sys-primary-container", "#ffd8e6", "#742e50"],
+    ["--mat-sys-on-primary-container", "#742e50", "#ffd8e6"],
+    ["--mat-sys-primary-fixed", "#ffd8e6", "#ffd8e6"],
+    ["--mat-sys-primary-fixed-dim", "#ffb0d0", "#ffb0d0"],
+    ["--mat-sys-inverse-primary", "#ffb0d0", "#914568"],
+  ],
+  secondary: [
+    ["--mat-sys-secondary", "#795649", "#eabdac"],
+    ["--mat-sys-on-secondary", "#ffffff", "#46291e"],
+    ["--mat-sys-secondary-container", "#ffdbce", "#5f3f33"],
+    ["--mat-sys-on-secondary-container", "#5f3f33", "#ffdbce"],
+    ["--mat-sys-secondary-fixed", "#ffdbce", "#ffdbce"],
+    ["--mat-sys-secondary-fixed-dim", "#eabdac", "#eabdac"],
+  ],
+  tertiary: [
+    ["--mat-sys-tertiary", "#7b563c", "#edbd9c"],
+    ["--mat-sys-on-tertiary", "#ffffff", "#472912"],
+    ["--mat-sys-tertiary-container", "#ffdcc5", "#613f26"],
+    ["--mat-sys-on-tertiary-container", "#613f26", "#ffdcc5"],
+    ["--mat-sys-tertiary-fixed", "#ffdcc5", "#ffdcc5"],
+    ["--mat-sys-tertiary-fixed-dim", "#edbd9c", "#edbd9c"],
+  ],
+  error: [
+    ["--mat-sys-error", "#b81f1e", "#ffb4ab"],
+    ["--mat-sys-on-error", "#ffffff", "#690005"],
+    ["--mat-sys-error-container", "#ffdad6", "#93000a"],
+    ["--mat-sys-on-error-container", "#93000a", "#ffdad6"],
+  ],
+  surface: [
+    ["--mat-sys-background", "#fff8f8", "#161213"],
+    ["--mat-sys-on-background", "#1f1a1b", "#eae0e1"],
+    ["--mat-sys-surface", "#fff8f8", "#161213"],
+    ["--mat-sys-on-surface", "#1f1a1b", "#eae0e1"],
+    ["--mat-sys-surface-variant", "#f0dee2", "#4f4447"],
+    ["--mat-sys-on-surface-variant", "#4f4447", "#f0dee2"],
+    ["--mat-sys-surface-dim", "#e1d8d9", "#161213"],
+    ["--mat-sys-surface-bright", "#fff8f8", "#3d3839"],
+    ["--mat-sys-surface-container-lowest", "#ffffff", "#110d0e"],
+    ["--mat-sys-surface-container-low", "#fcf1f2", "#1f1a1b"],
+    ["--mat-sys-surface-container", "#f6ebec", "#231e1f"],
+    ["--mat-sys-surface-container-high", "#f0e6e7", "#2e292a"],
+    ["--mat-sys-surface-container-highest", "#eae0e1", "#393334"],
+    ["--mat-sys-inverse-surface", "#342f30", "#eae0e1"],
+    ["--mat-sys-inverse-on-surface", "#f9eeef", "#342f30"],
+    ["--mat-sys-surface-tint", "#914568", "#ffb0d0"],
+  ],
+  misc: [
+    ["--mat-sys-outline", "#817377", "#9c8d91"],
+    ["--mat-sys-outline-variant", "#d3c2c6", "#4f4447"],
+    ["--mat-sys-scrim", "#000000", "#000000"],
+    ["--mat-sys-shadow", "#000000", "#000000"],
+  ],
+};
+
+for (const [group, list] of Object.entries(tokens)) {
+  const el = document.getElementById(group);
+  for (const [name, light, dark] of list) {
+    const card = document.createElement('div');
+    card.className = 'swatch';
+    card.innerHTML = `
+      <div class="colors">
+        <div style="background:${light}"><span class="mode-tag">light</span></div>
+        <div style="background:${dark}"><span class="mode-tag">dark</span></div>
+      </div>
+      <div class="label">
+        <span class="token">${name}</span>
+        <span class="hex">${light} / ${dark}</span>
+      </div>`;
+    el.appendChild(card);
+  }
+}
+</script>
+</body>
+</html>
