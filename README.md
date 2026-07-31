@@ -6,11 +6,11 @@
 
 # Credits
 
-- Angular 22
-- [Angular Material](https://material.angular.dev/)
-- [Font Awesome](https://fontawesome.com/)
-- [fslightbox.js](https://fslightbox.com/)
-- Claude Code
+- Angular 22 - framework
+- [Angular Material](https://material.angular.dev/) - styling
+- [Font Awesome](https://fontawesome.com/) - icons
+- [fslightbox.js](https://fslightbox.com/) - lightbox for galleries
+- Claude Code - AI assistant
 
 # Angular Material Theme
 
