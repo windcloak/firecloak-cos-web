@@ -1,18 +1,19 @@
 // Reads each JPEG's real pixel dimensions straight from its file header
 // (no decode, no npm dependency needed) and writes/overwrites a
-// dimensions.json manifest into every public/cosplay/{id}/ folder,
-// covering that folder's own images plus any subfolders (m/, s/, wip/,
-// etc).
+// dimensions.json manifest into every public/cosplay/{id}/ and
+// public/tutorials/{id}/ folder, covering that folder's own images plus
+// any subfolders (m/, s/, wip/, etc).
 //
 // Run this any time you add, remove, or replace photos under
-// public/cosplay/ — it's safe to re-run any time, it just regenerates
-// every manifest fresh from what's actually on disk.
+// public/cosplay/ or public/tutorials/ — it's safe to re-run any time,
+// it just regenerates every manifest fresh from what's actually on disk.
 //
 //   npm run generate:dimensions
 //
-// The lightbox (PhotoSwipe) reads these manifests at runtime to know
-// each photo's true size for its zoom math, since that isn't stored in
-// Firestore and hand-annotating thousands of photos isn't practical.
+// The cosplay lightbox (PhotoSwipe) and the tutorial detail page both
+// read these manifests at runtime to know each photo's true size,
+// since that isn't stored in Firestore and hand-annotating thousands
+// of photos isn't practical.
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -65,33 +66,41 @@ function findJpegsRecursive(dir, baseDir) {
   return results;
 }
 
-const cosplayDir = path.join(process.cwd(), 'public/cosplay');
-const folders = fs
-  .readdirSync(cosplayDir, { withFileTypes: true })
-  .filter((d) => d.isDirectory());
-
+let totalManifests = 0;
 let totalFiles = 0;
 let totalWarnings = 0;
 
-for (const folder of folders) {
-  const folderPath = path.join(cosplayDir, folder.name);
-  const relativeFiles = findJpegsRecursive(folderPath, folderPath);
-
-  const manifest = {};
-  for (const relativeFile of relativeFiles) {
-    const dims = readDimensions(path.join(folderPath, relativeFile));
-    if (dims) {
-      manifest[relativeFile] = dims;
-      totalFiles++;
-    } else {
-      console.warn(`Could not read dimensions: ${folder.name}/${relativeFile}`);
-      totalWarnings++;
-    }
+for (const collection of ['public/cosplay', 'public/tutorials']) {
+  const collectionDir = path.join(process.cwd(), collection);
+  if (!fs.existsSync(collectionDir)) {
+    continue;
   }
 
-  fs.writeFileSync(path.join(folderPath, 'dimensions.json'), JSON.stringify(manifest));
+  const folders = fs
+    .readdirSync(collectionDir, { withFileTypes: true })
+    .filter((d) => d.isDirectory());
+
+  for (const folder of folders) {
+    const folderPath = path.join(collectionDir, folder.name);
+    const relativeFiles = findJpegsRecursive(folderPath, folderPath);
+
+    const manifest = {};
+    for (const relativeFile of relativeFiles) {
+      const dims = readDimensions(path.join(folderPath, relativeFile));
+      if (dims) {
+        manifest[relativeFile] = dims;
+        totalFiles++;
+      } else {
+        console.warn(`Could not read dimensions: ${collection}/${folder.name}/${relativeFile}`);
+        totalWarnings++;
+      }
+    }
+
+    fs.writeFileSync(path.join(folderPath, 'dimensions.json'), JSON.stringify(manifest));
+    totalManifests++;
+  }
 }
 
 console.log(
-  `Wrote ${folders.length} dimensions.json files covering ${totalFiles} images (${totalWarnings} warnings).`,
+  `Wrote ${totalManifests} dimensions.json files covering ${totalFiles} images (${totalWarnings} warnings).`,
 );

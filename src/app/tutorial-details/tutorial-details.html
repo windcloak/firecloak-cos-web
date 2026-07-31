@@ -1,1 +1,69 @@
-<p>tutorial-details works!</p>
+<section class="tutorial-details">
+  @if (tutorialResource.isLoading()) {
+    <app-loading-spinner />
+  } @else if (tutorialResource.error()) {
+    <p class="error">Something went wrong loading this tutorial — please try again later.</p>
+  } @else if (!tutorialResource.hasValue()) {
+    <p class="error">Tutorial not found.</p>
+  } @else {
+    @let tutorial = tutorialResource.value();
+
+    <h1>{{ tutorial.name }} Tutorial</h1>
+
+    @if (mainImgSrc(); as src) {
+      <figure class="main-tutorial">
+        <img
+          [ngSrc]="src"
+          [width]="mainImgDims()?.width ?? 720"
+          [height]="mainImgDims()?.height ?? 1080"
+          class="main-img"
+          [alt]="tutorial.name"
+          priority
+        />
+        @if (tutorial.longDescription) {
+          <figcaption>{{ tutorial.longDescription }}</figcaption>
+        }
+      </figure>
+    }
+
+    <p class="description">{{ tutorial.description }}</p>
+
+    @if (tutorial.materials?.length) {
+      <h2>Materials</h2>
+
+      <mat-list role="list" class="materials">
+        @for (material of tutorial.materials; track material) {
+          <mat-list-item role="listitem">{{ material }}</mat-list-item>
+        }
+      </mat-list>
+    }
+
+    @if (stepImages().length) {
+      <h2>Steps</h2>
+
+      <div class="steps">
+        @for (step of stepImages(); track step.src) {
+          <figure class="step">
+            <img
+              [ngSrc]="step.src"
+              [width]="step.width"
+              [height]="step.height"
+              [placeholder]="placeholderSrc"
+              class="step-img"
+              [alt]="step.caption"
+            />
+            @if (step.caption) {
+              <figcaption>{{ step.caption }}</figcaption>
+            }
+            <p class="step-description">
+              @if (step.link) {
+                <a [href]="step.link" target="_blank" rel="noopener">[link]</a>
+              }
+              {{ step.description }}
+            </p>
+          </figure>
+        }
+      </div>
+    }
+  }
+</section>
