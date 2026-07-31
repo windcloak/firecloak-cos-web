@@ -11,4 +11,9 @@
   // instead of overflowing off to one side.
   --mat-icon-button-icon-size: 35px;
   --mat-icon-button-state-layer-size: 56px;
+
+  @media (max-width: 600px) {
+    right: 8px;
+    bottom: 8px;
+  }
 }
