@@ -74,8 +74,11 @@ export class CosplayDetails {
 
     return (cosplay.imgGalleryUrls ?? []).map((image, i) => {
       const big = stripAssetsPrefix(image.big) ?? '';
-      const small = stripAssetsPrefix(image.small) ?? big;
-      const medium = stripAssetsPrefix(image.medium);
+      // small/medium are optional in Firestore now — new entries can
+      // just set "big" and skip the other two, since they're always
+      // the same filename under a sibling "s/"/"m/" folder.
+      const small = stripAssetsPrefix(image.small) ?? this.variantSrc(big, 's');
+      const medium = stripAssetsPrefix(image.medium) ?? this.variantSrc(big, 'm');
       return this.toGalleryPhoto({
         id,
         thumbSrc: small,
@@ -97,7 +100,7 @@ export class CosplayDetails {
       const src = stripAssetsPrefix(wip.img) ?? '';
       return this.toGalleryPhoto({
         id,
-        thumbSrc: this.wipThumbSrc(src),
+        thumbSrc: this.variantSrc(src, 's'),
         fullSrc: src,
         alt: wip.desc || `${cosplay.name} WIP photo ${i + 1}`,
         caption: wip.desc,
@@ -105,13 +108,14 @@ export class CosplayDetails {
     });
   });
 
-  // WIP photos only ever get a single "img" field in Firestore (unlike
-  // the main gallery's separate big/small/medium fields), so rather
-  // than migrating every existing document, the small/thumbnail
-  // variant's path is derived straight from that one field — it's just
-  // the same filename under a "wip/s/" folder instead of "wip/".
-  private wipThumbSrc(src: string): string {
-    return src.replace(/\/wip\/([^/]+)$/, '/wip/s/$1');
+  // The small/medium variant of any image is always the same filename
+  // under a sibling "s/"/"m/" folder (e.g. cosplay/{id}/1.jpg ->
+  // cosplay/{id}/s/1.jpg, or cosplay/{id}/wip/1.jpg ->
+  // cosplay/{id}/wip/s/1.jpg) — used both to derive gallery
+  // small/medium when Firestore only has "big", and to derive WIP
+  // thumbnails, which only ever get a single "img" field.
+  private variantSrc(src: string, folder: 's' | 'm'): string {
+    return src.replace(/\/([^/]+)$/, `/${folder}/$1`);
   }
 
   // Looks up each image's real size in dimensions.json, keyed by its

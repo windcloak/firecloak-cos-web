@@ -17,7 +17,7 @@ export interface GalleryImage {
 
 export interface WipImage {
   img: string;
-  desc: string;
+  desc?: string;
 }
 
 export interface CosplayCredit {
