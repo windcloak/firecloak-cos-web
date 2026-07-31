@@ -1,0 +1,14 @@
+.scroll-top-btn {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 100;
+  color: var(--mat-sys-primary);
+
+  // mat-icon-button sizes itself off these two tokens — its own
+  // padding is computed as (state-layer-size - icon-size) / 2, so
+  // setting both together keeps the icon centered as it grows,
+  // instead of overflowing off to one side.
+  --mat-icon-button-icon-size: 35px;
+  --mat-icon-button-state-layer-size: 56px;
+}

@@ -4,6 +4,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { Header } from './header/header';
 import { Footer } from './footer/footer';
+import { ScrollToTop } from './scroll-to-top/scroll-to-top';
 import { NAV_LINKS } from './nav-links';
 
 @Component({
@@ -16,6 +17,7 @@ import { NAV_LINKS } from './nav-links';
     MatListModule,
     Header,
     Footer,
+    ScrollToTop,
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss',
