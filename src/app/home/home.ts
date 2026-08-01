@@ -12,16 +12,50 @@ interface HeroSlide {
   id: string;
   character: string;
   series: string;
+  // Path to this slide's own dedicated banner photo under public/home/
+  // — spelled out explicitly here rather than assumed from this
+  // entry's position in the array, so reordering/adding/removing
+  // slides can't silently point one at the wrong image file.
+  image: string;
 }
 
 const HERO_SLIDES: HeroSlide[] = [
-  { id: 'princess-peach-smash-bros-ultimate', character: 'Princess Peach', series: 'Super Mario Bros' },
-  { id: 'holo-merchants-spice-and-wolf', character: 'Holo', series: 'Spice & Wolf' },
-  { id: 'aqua-konosuba', character: 'Aqua', series: 'Konosuba!' },
-  { id: 'tohru-swimsuit-dragon-maid', character: 'Tohru', series: "Ms. Kobayashi's Dragon Maid" },
-  { id: 'louise-familiar-of-zero', character: 'Louise', series: 'Familiar of Zero' },
-  { id: 'violet-evergarden', character: 'Violet', series: 'Violet Evergarden' },
-  { id: 'nami-gangsta-onepiece', character: 'Nami', series: 'One Piece' },
+  {
+    id: 'shampoo',
+    character: 'Shampoo',
+    series: 'Ranma 1/2',
+    image: 'home/shampoo.jpg',
+  },
+  {
+    id: 'princess-peach-wedding',
+    character: 'Princess Peach',
+    series: 'Super Mario Bros',
+    image: 'home/peach-wedding.jpg',
+  },
+  {
+    id: 'princess-peach-smash-bros-ultimate',
+    character: 'Princess Peach',
+    series: 'Super Mario Bros',
+    image: 'home/peach.jpg',
+  },
+  {
+    id: 'holo-merchants-spice-and-wolf',
+    character: 'Holo',
+    series: 'Spice & Wolf',
+    image: 'home/holo-merchants.jpg',
+  },
+  {
+    id: 'violet-evergarden',
+    character: 'Violet',
+    series: 'Violet Evergarden',
+    image: 'home/violet.jpg',
+  },
+  {
+    id: 'nami-gangsta-onepiece',
+    character: 'Nami',
+    series: 'One Piece',
+    image: 'home/nami-gangsta.jpg',
+  },
 ];
 
 @Component({

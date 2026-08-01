@@ -9,7 +9,7 @@
       @for (slide of slides; track slide.id; let i = $index) {
         <a class="hero-slide" [routerLink]="['/cosplay', slide.id]" (click)="onSlideClick($event)">
           <img
-            [ngSrc]="'home/slideshow' + (i + 1) + '.jpg'"
+            [ngSrc]="slide.image"
             width="950"
             height="633"
             class="hero-img"
