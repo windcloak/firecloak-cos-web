@@ -44,11 +44,12 @@ function getJpegSize(buffer) {
 }
 
 function readDimensions(filePath) {
-  const fd = fs.openSync(filePath, 'r');
-  const buffer = Buffer.alloc(128 * 1024);
-  const bytesRead = fs.readSync(fd, buffer, 0, buffer.length, 0);
-  fs.closeSync(fd);
-  return getJpegSize(buffer.subarray(0, bytesRead));
+  // Reads the whole file rather than just a leading chunk — some
+  // exports (e.g. Lightroom/Photoshop with a large embedded preview or
+  // ICC profile in their EXIF block) push the actual SOF marker well
+  // past what a fixed-size read would capture, silently producing a
+  // "could not read dimensions" warning for a perfectly valid file.
+  return getJpegSize(fs.readFileSync(filePath));
 }
 
 function findJpegsRecursive(dir, baseDir) {

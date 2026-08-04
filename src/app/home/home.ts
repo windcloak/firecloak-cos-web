@@ -33,10 +33,10 @@ const HERO_SLIDES: HeroSlide[] = [
     image: 'home/peach-wedding.jpg',
   },
   {
-    id: 'princess-peach-smash-bros-ultimate',
-    character: 'Princess Peach',
-    series: 'Super Mario Bros',
-    image: 'home/peach.jpg',
+    id: 'kohaku-drstone',
+    character: 'Kohaku',
+    series: 'Dr. Stone',
+    image: 'home/kohaku.jpg',
   },
   {
     id: 'holo-merchants-spice-and-wolf',
