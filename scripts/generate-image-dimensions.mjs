@@ -17,6 +17,52 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
+// EXIF orientation values 5-8 mean the camera/phone stored the pixel
+// data rotated 90°/270° from how it should actually display — the
+// SOF marker's width/height describe the *stored* pixels, but every
+// browser auto-rotates per this tag when painting the image, which
+// swaps the effective displayed width/height. Skipping this produces
+// a manifest that's internally consistent but describes the wrong
+// shape entirely for these photos, stretching them in the lightbox.
+function getExifOrientation(buffer) {
+  try {
+    let offset = 2;
+    while (offset + 4 < buffer.length) {
+      if (buffer[offset] !== 0xff) {
+        offset++;
+        continue;
+      }
+      const marker = buffer[offset + 1];
+      if (marker === 0xda) break; // start of scan — no more markers after this
+      if (marker === 0xd8 || marker === 0xd9 || (marker >= 0xd0 && marker <= 0xd7)) {
+        offset += 2;
+        continue;
+      }
+      const length = buffer.readUInt16BE(offset + 2);
+      if (marker === 0xe1 && buffer.toString('ascii', offset + 4, offset + 10) === 'Exif\0\0') {
+        const tiffStart = offset + 10;
+        const little = buffer.toString('ascii', tiffStart, tiffStart + 2) === 'II';
+        const u16 = (o) => (little ? buffer.readUInt16LE(o) : buffer.readUInt16BE(o));
+        const u32 = (o) => (little ? buffer.readUInt32LE(o) : buffer.readUInt32BE(o));
+        const ifdOffset = tiffStart + u32(tiffStart + 4);
+        const numEntries = u16(ifdOffset);
+        for (let i = 0; i < numEntries; i++) {
+          const entryOffset = ifdOffset + 2 + i * 12;
+          if (u16(entryOffset) === 0x0112) {
+            return u16(entryOffset + 8);
+          }
+        }
+        return 1;
+      }
+      offset += 2 + length;
+    }
+  } catch {
+    // Malformed/truncated EXIF block — fall back to "no rotation"
+    // rather than letting one bad file abort the whole batch.
+  }
+  return 1;
+}
+
 function getJpegSize(buffer) {
   if (buffer[0] !== 0xff || buffer[1] !== 0xd8) return null; // not a JPEG (SOI marker)
   let offset = 2;
@@ -29,8 +75,12 @@ function getJpegSize(buffer) {
     // SOF0/1/2/3/5/6/7/9/10/11/13/14/15 carry the real dimensions.
     // 0xC4 (DHT), 0xC8 (JPG ext), 0xCC (DAC) are excluded — same byte range, different meaning.
     if (marker >= 0xc0 && marker <= 0xcf && marker !== 0xc4 && marker !== 0xc8 && marker !== 0xcc) {
-      const height = buffer.readUInt16BE(offset + 5);
-      const width = buffer.readUInt16BE(offset + 7);
+      let height = buffer.readUInt16BE(offset + 5);
+      let width = buffer.readUInt16BE(offset + 7);
+      const orientation = getExifOrientation(buffer);
+      if (orientation >= 5 && orientation <= 8) {
+        [width, height] = [height, width];
+      }
       return { width, height };
     }
     if (marker === 0xd8 || marker === 0xd9 || (marker >= 0xd0 && marker <= 0xd7)) {
